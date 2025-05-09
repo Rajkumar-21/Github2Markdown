@@ -6,7 +6,7 @@ import os
 st.set_page_config(page_title="GitHub to Markdown", layout="wide")
 
 # --- Configuration ---
-BACKEND_API_URL = os.getenv("BACKEND_API_URL", "http://localhost:8000/api/fetch-repo")
+BACKEND_API_URL = os.getenv("BACKEND_API_URL", "https://g2m-backend.onrender.com/api/fetch-repo")
 
 # --- Helper function to display file tree (manual expand/collapse) ---
 def display_tree_manual_expand(node, on_file_click, level=0, parent_key_prefix="root"):
