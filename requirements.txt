@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+httpx
+python-dotenv
+pydantic
+streamlit
+requests # For making HTTP requests to the backend

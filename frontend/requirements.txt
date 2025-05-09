@@ -1,0 +1,2 @@
+streamlit
+requests # For making HTTP requests to the backend

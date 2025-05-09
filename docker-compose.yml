@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: gfm_backend # gfm = github_file_markdown
+    ports:
+      - "8000:8000" # Expose backend port if you want to access it directly
+    # volumes: # Uncomment for development to see backend code changes live
+    #   - ./backend/app:/app/app
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN} # Reads from .env file in this directory or shell
+    # env_file: # Alternative: use a .env file specific to the backend
+    #   - ./backend/.env
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: gfm_frontend_streamlit
+    ports:
+      - "8501:8501" # Streamlit default port
+    depends_on:
+      - backend
+    environment:
+      # This tells the Streamlit app where to find the backend
+      # 'backend' is the service name of the FastAPI app in this docker-compose file
+      - BACKEND_API_URL=http://backend:8000/api/fetch-repo
+    restart: unless-stopped
+
+# Optional: Create a .env file in this directory (github-to-markdown-streamlit/)
+# with your GITHUB_TOKEN if needed:
+# GITHUB_TOKEN=your_github_personal_access_token
